@@ -1,6 +1,8 @@
 from eventhandler import *
 from watchdog.observers import Observer
+
 import time
+import logging
 import sys
 
 class Watchdog: 
@@ -12,6 +14,8 @@ class Watchdog:
 		self.observer = Observer()
 		self.observer.schedule(self.change_handler, self.directory, recursive=True)
 
+		logging.info("Listener on \"%s\" started"%self.directory)
+
 	def watch(self): 
 		"""Start observing the directory"""
 		self.observer.start()
@@ -21,6 +25,7 @@ class Watchdog:
 				time.sleep(1)
 		except KeyboardInterrupt: 
 			self.observer.stop()
+
 
 		self.observer.join()
 

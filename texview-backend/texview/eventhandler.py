@@ -22,8 +22,6 @@ class ChangeHandler(FileSystemEventHandler):
 		# truncate the target path, so the projects directory is cut off
 		target = event.src_path[len(self.directory):].lstrip("/")
 		target_project = target.split(os.sep)[0]
-		print "Target:", target
-		print "Project:", target_project
 
 		is_build_event = target.startswith(os.path.join(target_project, "build"))
 

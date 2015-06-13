@@ -1,3 +1,4 @@
 # untracked files
 *.pyc
 php/database.sqlite3
+projects/*

@@ -1,6 +1,7 @@
 from compiler import *
 import threading
 import time
+import logging
 
 class Project: 
 	"""Representation of a TeXView project"""
@@ -18,6 +19,7 @@ class Project:
 
 	def queue_request(self):
 		"""Queue a new compile request based on a change in the project"""
+		logging.info("Compile request for project \"%s\""%self.directory)
 		self.compile_requests.append(time.time())
 
 	def compile(self): 

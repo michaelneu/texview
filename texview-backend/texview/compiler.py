@@ -2,6 +2,7 @@ import subprocess
 import os
 import os.path
 import shutil
+import logging
 
 class Compiler: 
 	"""A wrapper for pdflatex"""
@@ -35,6 +36,8 @@ class Compiler:
 
 	def compile(self): 
 		"""Runs pdflatex and returns a CompilerResult object"""
+		logging.info("Compile of project \"%s\" started"%self.directory)
+
 		self.clean_build()
 		self.prepare_compile()
 
@@ -45,7 +48,10 @@ class Compiler:
 
 		stdout = process.stdout.read()
 
-		return CompilerResult(stdout)
+		result = CompilerResult(stdout)
+		logging.info("Compile of project \"%s\" finished. Result was %s"%(self.directory, result.get_result()))
+
+		return result
 
 
 class CompilerResult: 
