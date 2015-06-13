@@ -4,13 +4,14 @@ import time
 
 class Project: 
 	"""Representation of a TeXView project"""
-	def __init__(self, directory, compile_wait_time=3000): 
+	def __init__(self, directory, compile_wait_time=3000, compile_times=2): 
 		"""Initialize a new representation of a project. The project will wait
 		for compile_wait_time ms of no changes before compiling"""
 		self.directory         = directory
 		self.compiler          = Compiler(directory)
 		self.compile_requests  = []
 		self.already_compiling = False
+		self.compile_times     = compile_times
 
 		self.thread = ProjectObserver(self, compile_wait_time)
 		self.thread.start()
@@ -21,11 +22,13 @@ class Project:
 
 	def compile(self): 
 		"""Compiles the project"""
-
 		if not self.already_compiling: 
 			self.already_compiling = True
 			self.compile_requests = []
-			self.compiler.compile()
+
+			for i in range(self.compile_times): 
+				self.compiler.compile()
+
 			self.already_compiling = False
 		else: 
 			self.queue_request()

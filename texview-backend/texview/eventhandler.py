@@ -1,4 +1,5 @@
 from project import *
+import util.io
 
 from watchdog.events import FileSystemEventHandler
 
@@ -18,12 +19,17 @@ class ChangeHandler(FileSystemEventHandler):
 		"""Decides whether a new compile should be started"""
 		event_type = event.event_type
 
-		target = event.src_path.lstrip(self.directory)
+		# truncate the target path, so the projects directory is cut off
+		target = event.src_path[len(self.directory):].lstrip("/")
 		target_project = target.split(os.sep)[0]
+		print "Target:", target
+		print "Project:", target_project
+
+		is_build_event = target.startswith(os.path.join(target_project, "build"))
 
 		# filter the changes to the project's base directory as we're only
 		# interested in changes within the project
-		if not (event_type == "modified" and target == target_project): 
+		if not ((event_type == "modified" and target == target_project) or is_build_event): 
 			if target_project not in self.projects.keys():
 				project_path = os.path.join(self.directory, target_project)
 				self.projects[target_project] = Project(project_path)

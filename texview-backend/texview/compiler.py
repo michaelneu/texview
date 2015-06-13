@@ -39,7 +39,6 @@ class Compiler:
 		self.prepare_compile()
 
 		start_info = ["pdflatex"] + self.extra_flags + [self.main_file]
-		print " ".join(start_info)
 
 		process = subprocess.Popen(start_info, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 		process.wait()
