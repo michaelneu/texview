@@ -3,7 +3,7 @@ require_once("../../php/database/database.php");
 
 # Provides methods for user management
 class User {
-	# returns whether the user's credentials are correct
+	# returns the user's id if the given credentials are correct
 	static function check_credentials($username, $password) {
 		$username = base64_encode($username);
 		$password = sha1($password);
@@ -11,7 +11,7 @@ class User {
 		$database = new Database();
 		$iterator = $database->query("
 			SELECT 
-				password
+				password, id
 
 			FROM 
 				users
@@ -23,17 +23,18 @@ class User {
 			$row = $iterator->next();
 
 			if ($row["password"] == $password) {
-				return true;
+				return $row["id"];
 			}
 		}
 
-		return false;
+		return -1;
 	}
 
 	# sets the login flag
-	static function login($username) {
+	static function login($username, $id) {
 		$_SESSION["login"] = array(
 			"username" => $username,
+			"id" => $id,
 			"time" => time(),
 			"ip" => $_SERVER["REMOTE_ADDR"]
 		);
@@ -51,29 +52,27 @@ class User {
 
 	# returns the projects owned by the logged in user
 	static function get_projects() {
-		$username = base64_encode($_SESSION["login"]["username"]);
+		$id = $_SESSION["login"]["id"];
 		$projects = array();
 
 		$database = new Database();
 		$iterator = $database->query("
 			SELECT 
-				projects.*
+				*
 
 			FROM 
 				projects 
 
-			JOIN (users)
-				ON users.id = projects.ref_owner
-
 			WHERE 
-				users.name = '$username';");
+				ref_owner = $id;");
 
 		while ($iterator->has_next()) {
 			$row = $iterator->next();
 
 			$projects[] = array(
 				"directory" => $row["directory"],
-				"name" => $row["name"]
+				"name" => base64_decode($row["name"]),
+				"id" => $row["id"]
 			);
 		}
 

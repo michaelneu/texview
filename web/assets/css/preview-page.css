@@ -1,0 +1,19 @@
+.preview-container {
+	position: absolute;
+	left: 0px;
+	right: 0px;
+	top: 35px;
+	bottom: 0px;
+	margin: 0px;
+}
+
+#pdf-preview-container {
+	display: none;
+	padding-top: 20px;
+}
+
+#pdf-preview-container canvas {
+	display: block;
+	margin-bottom: 20px;
+	box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
+}

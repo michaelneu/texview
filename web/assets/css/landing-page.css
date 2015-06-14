@@ -1,0 +1,72 @@
+/***************************
+**	    landing block     **
+***************************/
+
+.landing {
+	display: block;
+	width: 100%;
+	height: 100vh;
+
+	background-image: url(../images/landing-background.png);
+	color: #fff;
+}
+
+.landing .center-wrapper {
+	background-color: rgba(0, 0, 0, 0.0);
+}
+
+.landing .jumbotron {
+	text-shadow: 0px 0px 3px rgba(0, 0, 0, 0.7);
+	border-bottom: 1px solid #fff;
+
+	width: 200px;
+	padding-bottom: 10px;
+
+	margin: auto;
+	margin-bottom: 10px;
+}
+
+
+
+/***************************
+**	    hero section      **
+***************************/
+
+.heroes {
+	margin-top: 50px;
+}
+
+.heroes .header {
+	color: #777;
+	font-size: 20px;
+
+	margin-bottom: 50px;
+}
+.heroes .header h1 {
+	font-size: 40px;
+	color: #333;
+}
+
+.heroes h1, .heroes h2 {
+	font-weight: normal;
+	margin-bottom: 5px;
+}
+
+
+
+/***************************
+**	       footer         **
+***************************/
+
+.footer {
+	margin-top: 100px;
+	padding: 10px;
+	color: #bbb;
+}
+.footer a {
+	color: #ccc;
+	margin: 5px 10px;
+}
+.footer a:hover {
+	color: #fff;
+}

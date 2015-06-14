@@ -1,0 +1,90 @@
+.projects {
+	padding: 0px 10px;
+	vertical-align: top;
+	min-height: 100%;
+}
+
+.no.projects {
+	margin-top: 50px;
+	margin-bottom: 80px;
+}
+
+
+/***************************
+**	       project        **
+***************************/
+
+.projects .project {
+	color: #333;
+}
+
+.projects .project .text {
+	border-bottom-left-radius: 5px;
+	border-top-left-radius: 5px;
+
+	background-color: #FAFAF8;
+	margin-bottom: 20px;
+
+	transition-property: background-color;
+	transition-duration: 0.2s;
+}
+.projects .project .text:hover {
+	background-color: #f7f7f7;
+}
+
+.projects .project b {
+	display: block;
+
+	font-size: 16px;
+
+	padding-bottom: 10px;
+	padding-top: 10px;
+	padding-right: 20px;
+
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+.projects .project .time {
+	margin-bottom: 15px;
+}
+.projects .project .time span {
+	color: #888;
+	display: block;
+}
+
+
+
+/***************************
+**	   compile status     **
+***************************/
+
+.projects .project .compile {
+	float: left;
+	display: inline-block;
+
+	width: 30px;
+	height: 88px;
+
+	margin-right: 20px;
+
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+}
+
+.projects .project .compile.SUCCESS {
+	background-color: #5bbd72;
+}
+.projects .project .compile.FAIL {
+	background-color: #d95c5c;
+}
+.projects .project .compile.UNKNOWN {
+	background-color: #f2c61f;
+}
+
+.projects .project .compile .icon {
+	margin-left: 7px;
+	margin-top: 33px;
+	color: #fff;
+}

@@ -1,0 +1,96 @@
+/***************************
+**	      container       **
+***************************/
+
+.container {
+	max-width: 960px;
+	margin: auto;
+}
+
+.ui.menu + .container {
+	padding-top: 75px;
+}
+
+.full.width {
+	width: 100%;
+}
+
+
+
+/***************************
+**	       navbar         **
+***************************/
+
+.ui.gray.inverted {
+	background-color: #444;
+}
+
+.ui.menu {
+	border-radius: 0px;
+}
+.ui.fixed.menu {
+	position: fixed;
+}
+.ui.animated.menu {
+	transition-property: background-color;
+	transition-duration: 0.2s;
+}
+
+
+
+/***************************
+**	    positioning       **
+***************************/
+
+.center-aligned {
+	text-align: center;
+}
+
+.pull.left {
+	float: left;
+}
+.pull.right {
+	float: right;
+}
+
+.clearfix:after {
+	content: " ";
+	visibility: hidden;
+
+	display: block;
+	height: 0px;
+
+	clear: both;
+}
+
+
+/***************************
+**	   text coloring      **
+***************************/
+
+.muted {
+	color: #333;
+	text-shadow: 0px 0px 1px rgba(255, 255, 255, 0.9);
+}
+.muted h1 {
+	font-weight: normal;
+}
+
+
+
+/***************************
+**	vertically centering  **
+***************************/
+
+.center-wrapper {
+	display: table;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	overflow-x: hidden;
+}
+
+.center-wrapper .vertically {
+	display: table-cell;
+	vertical-align: middle;
+}
