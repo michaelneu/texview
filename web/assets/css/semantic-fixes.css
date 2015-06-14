@@ -28,9 +28,6 @@
 .ui.menu {
 	border-radius: 0px;
 }
-.ui.fixed.menu {
-	position: fixed;
-}
 .ui.animated.menu {
 	transition-property: background-color;
 	transition-duration: 0.2s;

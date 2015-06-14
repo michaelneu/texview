@@ -37,7 +37,7 @@ TeXViewPDF.prototype.showPreview = function() {
 	// prepare rendering
 	texviewpdf.previewContainer.empty();
 
-	PDFJS.getDocument("../download/getpdf.php").then(function (pdf) {
+	PDFJS.getDocument("../download/getpdf.php?project=" + texviewpdf.id).then(function (pdf) {
 		var pages = pdf.numPages,
 			i;
 

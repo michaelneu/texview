@@ -81,7 +81,6 @@ TeXViewReader.prototype.onPollSuccess = function(data) {
 	this.__colorNavbar(status);
 
 	if (data.reloadRequired) {
-		alert("reloading");
 		if (status == "SUCCESS") {
 			this.preview.showPreview();
 		} else {

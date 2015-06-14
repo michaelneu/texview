@@ -2,3 +2,4 @@
 *.pyc
 php/database.sqlite3
 projects/*
+!projects/.keepdir

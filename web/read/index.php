@@ -5,6 +5,7 @@ $title = "TeXView";
 
 if (isset($_GET["project"])) {
 	$project_directory = $_GET["project"];
+	$download_template = "../download/get%s.php?project=$project_directory";
 
 	$texview_id = sprintf("\"%s\"", $project_directory);
 	$project    = new Project($project_directory);
@@ -12,6 +13,7 @@ if (isset($_GET["project"])) {
 	$title = $project->get_name() . " &middot; " . $title;
 } else {
 	$texview_id = "undefined";
+	$download_template = "";
 }
 
 
@@ -30,8 +32,8 @@ if (isset($_GET["project"])) {
 		<!-- <menu bar> -->
 		<div class="ui gray inverted animated fixed menu">
 			<div class="container">
-				<a class="item" href="#"><i class="file pdf outline icon"></i> PDF</a>
-				<a class="item" href="#"><i class="code icon"></i> LaTeX log</a>
+				<a class="item" target="_blank" href="<?php printf($download_template . "&save", "pdf"); ?>"><i class="file pdf outline icon"></i> PDF</a>
+				<a class="item" target="_blank" href="<?php printf($download_template, "log"); ?>"><i class="code icon"></i> LaTeX log</a>
 			</div>
 		</div>
 		<!-- </menu bar> -->

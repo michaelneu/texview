@@ -73,6 +73,16 @@ class Project {
 		return $information;
 	}
 
+	function get_pdf() {
+		if ($this->get_compile_status() == CompileStatus::SUCCESS) {
+			$pdf_path = path_join($this->dirname, "build/main.pdf");
+
+			return $pdf_path;
+		} else {
+			return false;
+		}
+	}
+
 	static function create($user_id, $alias) {
 		$dirname = sha1(uniqid() . time());
 
