@@ -26,7 +26,7 @@ TeXViewPDF.prototype.showNotFoundMessage = function() {
 TeXViewPDF.prototype.showPreview = function() {
 	var texviewpdf = this,
 		scrolled = {
-			x: window.scrollY, 
+			x: window.scrollX,
 			y: window.scrollY
 		};
 
@@ -44,12 +44,13 @@ TeXViewPDF.prototype.showPreview = function() {
 		for (i = 0; i < pages; i++) {
 			pdf.getPage(i + 1).then(function (page) {
 				texviewpdf.renderPage(page);
+
+				// scroll back to the original position
+				window.scrollTo(scrolled.x, scrolled.y);
 			});
 		}
 
-		window.scrollTo(scrolled.x, scrolled.y);
 	});
-
 };
 
 
