@@ -50,7 +50,7 @@ class Compiler:
 
 		# check if a second compile is neccessary
 		compile_result = CompilerResult(pdflatex_stdout)
-		result = result.get_result()
+		result = compile_result.get_result()
 		logging.info("[COMPILE][PDFLATEX] Compile of project \"%s\" finished. Result was %s"%(self.directory, result))
 
 		if result == CompilerResult.SUCCESS: 
@@ -65,7 +65,7 @@ class Compiler:
 
 			# analyze the output of the second compile pass
 			compile_result = CompilerResult(pdflatex_stdout)
-			logging.info("[COMPILE][PDFLATEX] Compile of project \"%s\" finished. Result was %s"%(self.directory, result.get_result()))
+			logging.info("[COMPILE][PDFLATEX] Compile of project \"%s\" finished. Result was %s"%(self.directory, compile_result.get_result()))
 
 		return compile_result
 

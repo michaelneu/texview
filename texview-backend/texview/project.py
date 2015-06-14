@@ -12,7 +12,6 @@ class Project:
 		self.compiler          = Compiler(directory)
 		self.compile_requests  = []
 		self.already_compiling = False
-		self.compile_times     = compile_times
 
 		self.thread = ProjectObserver(self, compile_wait_time)
 		self.thread.start()
