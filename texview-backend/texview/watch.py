@@ -14,7 +14,7 @@ class Watchdog:
 		self.observer = Observer()
 		self.observer.schedule(self.change_handler, self.directory, recursive=True)
 
-		logging.info("Listener on \"%s\" started"%self.directory)
+		logging.info("Watchdog on \"%s\" started"%self.directory)
 
 	def watch(self): 
 		"""Start observing the directory"""
@@ -24,6 +24,7 @@ class Watchdog:
 			while True: 
 				time.sleep(1)
 		except KeyboardInterrupt: 
+			logging.info("Received KeyboardInterrupt, shutting down")
 			self.observer.stop()
 
 

@@ -13,7 +13,7 @@ import texview.util.io
 
 if __name__ == "__main__":
 	logging.basicConfig(format="[%(asctime)s]   %(message)s", datefmt="%d.%m.%Y - %I:%M:%S", level=logging.INFO)
-	logging.info("This is texview-backend. Starting listeners...")
+	logging.info("This is texview-backend. Starting watchdogs...")
 
 	projects_directory = texview.util.io.get_projects_directory(__file__)
 

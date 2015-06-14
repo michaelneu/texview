@@ -1,4 +1,6 @@
-import subprocess
+from makeindex import *
+from pdflatex import *
+
 import os
 import os.path
 import shutil
@@ -6,11 +8,11 @@ import logging
 
 class Compiler: 
 	"""A wrapper for pdflatex"""
-	def __init__(self, directory, main_file="main.tex", extra_flags=["--halt-on-error", "--shell-escape"]): 
+	def __init__(self, directory, main_file="main"): 
 		"""Initializes a new Compiler which compiles directory/main_file.tex 
 		and returns the output of pdflatex"""
-		self.extra_flags = extra_flags
-		self.main_file   = main_file
+		self.main_file   = main_file + ".tex"
+		self.index_file  = main_file + ".idx"
 
 		self.directory       = directory
 		self.src_directory   = os.path.join(self.directory, "src")
@@ -36,22 +38,36 @@ class Compiler:
 
 	def compile(self): 
 		"""Runs pdflatex and returns a CompilerResult object"""
-		logging.info("Compile of project \"%s\" started"%self.directory)
+		logging.info("[COMPILE] Compile of project \"%s\" started"%self.directory)
 
+		# clean the build directory
 		self.clean_build()
 		self.prepare_compile()
 
-		start_info = ["pdflatex"] + self.extra_flags + [self.main_file]
+		# compile with pdflatex
+		pdflatex        = Pdflatex(self.main_file)
+		pdflatex_stdout = pdflatex.compile()
 
-		process = subprocess.Popen(start_info, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-		process.wait()
+		# check if a second compile is neccessary
+		compile_result = CompilerResult(pdflatex_stdout)
+		result = result.get_result()
+		logging.info("[COMPILE][PDFLATEX] Compile of project \"%s\" finished. Result was %s"%(self.directory, result))
 
-		stdout = process.stdout.read()
+		if result == CompilerResult.SUCCESS: 
+			# prepare the latex index file
+			if os.path.exists(self.index_file): 
+				makeindex = Makeindex(self.index_file)
+				makeindex.compile()
+				logging.info("[COMPILE][MAKEINDEX] Index processed for project \"%s\""%self.directory)
 
-		result = CompilerResult(stdout)
-		logging.info("Compile of project \"%s\" finished. Result was %s"%(self.directory, result.get_result()))
+			# compile second time with pdflatex
+			pdflatex_stdout = pdflatex.compile()
 
-		return result
+			# analyze the output of the second compile pass
+			compile_result = CompilerResult(pdflatex_stdout)
+			logging.info("[COMPILE][PDFLATEX] Compile of project \"%s\" finished. Result was %s"%(self.directory, result.get_result()))
+
+		return compile_result
 
 
 class CompilerResult: 

@@ -5,7 +5,7 @@ import logging
 
 class Project: 
 	"""Representation of a TeXView project"""
-	def __init__(self, directory, compile_wait_time=3000, compile_times=2): 
+	def __init__(self, directory, compile_wait_time=3000): 
 		"""Initialize a new representation of a project. The project will wait
 		for compile_wait_time ms of no changes before compiling"""
 		self.directory         = directory
@@ -19,7 +19,7 @@ class Project:
 
 	def queue_request(self):
 		"""Queue a new compile request based on a change in the project"""
-		logging.info("Compile request for project \"%s\""%self.directory)
+		logging.info("[REQUEST] Compile request for project \"%s\""%self.directory)
 		self.compile_requests.append(time.time())
 
 	def compile(self): 
@@ -28,8 +28,7 @@ class Project:
 			self.already_compiling = True
 			self.compile_requests = []
 
-			for i in range(self.compile_times): 
-				self.compiler.compile()
+			self.compiler.compile()
 
 			self.already_compiling = False
 		else: 
