@@ -29,4 +29,30 @@ function rrmdir($dir) {
 	}
 }
 
+
+function walk_dir($directory) {
+	$sub_folders = array();
+	$sub_files = array();
+
+	$items = scandir($directory);
+	$filtered_items = array_diff($items, array(".", ".."));
+
+	foreach ($filtered_items as $item) {
+		$path = path_join($directory, $item);
+
+		if (is_dir($path)) {
+			$sub_folders[$item] = walk_dir($path);
+		} else {
+			$sub_files[] = $item;
+		}
+	}
+
+	$sub_items = array(
+		"folders" => $sub_folders,
+		"files"   => $sub_files
+	);
+
+	return $sub_items;
+}
+
 ?>

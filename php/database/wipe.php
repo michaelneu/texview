@@ -14,7 +14,7 @@ if (isset($GLOBALS["wipe_db"]) and $GLOBALS["wipe_db"]) {
 	# create database structure
 	$db = new Database();
 	$db->exec("CREATE TABLE users (id INTEGER PRIMARY KEY, username TEXT, password TEXT);");
-	$db->exec("CREATE TABLE projects (id INTEGER PRIMARY KEY, ref_owner INTEGER, directory TEXT, name TEXT);");
+	$db->exec("CREATE TABLE projects (id INTEGER PRIMARY KEY, ref_owner INTEGER, directory TEXT, name TEXT, edit_token TEXT);");
 
 	# create root user
 	$root = $GLOBALS["root"];

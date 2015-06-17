@@ -18,13 +18,35 @@ class Project {
 		$this->logfile   = path_join($this->dirname, "build/main.log");
 	}
 
+	function get_token() {
+		$directory = $this->directory;
+
+		$database = new Database();
+		$iterator = $database->query("
+			SELECT
+				edit_token
+
+			FROM 
+				projects
+
+			WHERE 
+				directory = '$directory';");
+
+		if ($iterator->has_next()) {
+			$data = $iterator->next();
+			$token = $data["edit_token"];
+
+			return $token;
+		}
+	}
+
 	function get_name() {
 		$directory = $this->directory;
 
 		$database = new Database();
 		$iterator = $database->query("
 			SELECT
-				*
+				name
 
 			FROM 
 				projects
@@ -83,23 +105,57 @@ class Project {
 		}
 	}
 
+	function get_directory_tree() {
+		$src_dir = path_join($this->dirname, "src");
+
+		return walk_dir($src_dir);
+	}
+
 	static function create($user_id, $alias) {
 		$dirname = sha1(uniqid() . time());
+		$token   = sha1($dirname . uniqid() . time());
 
 		$user_id += 0;
-		$alias = base64_encode($alias);
+		$alias    = base64_encode($alias);
 
 		$database = new Database();
-		$database->exec("INSERT INTO projects (ref_owner, directory, name) VALUES ($user_id, '$dirname', '$alias');");
+		$database->exec("
+			INSERT INTO 
+				projects (
+					ref_owner, 
+					directory, 
+					name, 
+					edit_token
+				) 
+
+			VALUES (
+				$user_id, 
+				'$dirname', 
+				'$alias',
+				'$token'
+			);");
 
 		$base_dir = "../../projects/$dirname";
 		$base_dir_success = mkdir($base_dir);
 
 		if ($base_dir_success) {
-			mkdir(path_join($base_dir, "src"));
+			$src_dir = path_join($base_dir, "src");
+
+			mkdir($src_dir);
 			mkdir(path_join($base_dir, "build"));
 
-			return $dirname;
+			file_put_contents(path_join($src_dir, "main.tex"), "\documentclass{article}
+
+\\begin{document}
+	~
+\\end{document}");
+
+			$project = array(
+				"directory" => $dirname,
+				"token"     => $token
+			);
+
+			return $project;
 		} else {
 			return null;
 		}
@@ -112,7 +168,7 @@ class Project {
 		$database = new Database();
 		$iterator = $database->query("
 			SELECT
-				*
+				directory
 
 			FROM 
 				projects

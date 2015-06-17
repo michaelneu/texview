@@ -16,20 +16,20 @@ function TeXViewReader(id) {
  * Long poll for changes in the PDF
  */
 TeXViewReader.prototype.poll = function(force) {
-	var TeXViewReader = this;
+	var texview = this;
 	
 	force = force !== undefined ? "&force" : "";
 
-	if (TeXViewReader.id !== undefined) {
+	if (texview.id !== undefined) {
 		$.ajax({
-			url: "status.php?project=" + TeXViewReader.id + force,
+			url: "status.php?project=" + texview.id + force,
 			timeout: 30000,
 			dataType: "json",
 			success: function (data) {
-				TeXViewReader.onPollSuccess.call(TeXViewReader, data);
+				texview.onPollSuccess(data);
 			},
 			error: function (data) {
-				TeXViewReader.onPollFailed.call(TeXViewReader, data);
+				texview.onPollFailed(data);
 			}
 		});
 	}
@@ -95,9 +95,9 @@ TeXViewReader.prototype.onPollSuccess = function(data) {
  * Restarts the polling if it failed after 500ms. Called by TeXViewReader.poll()
  */
 TeXViewReader.prototype.onPollFailed = function(data) {
-	var TeXViewReader = this;
+	var texview = this;
 
 	setTimeout(function () {
-		TeXViewReader.poll();
+		texview.poll();
 	}, 500);
 };

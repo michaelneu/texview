@@ -72,7 +72,8 @@ class User {
 			$projects[] = array(
 				"directory" => $row["directory"],
 				"name" => base64_decode($row["name"]),
-				"id" => $row["id"]
+				"id" => $row["id"],
+				"token" => $row["edit_token"]
 			);
 		}
 

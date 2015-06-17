@@ -21,6 +21,8 @@ if (isset($_GET["project"])) {
 <!doctype html>
 <html>
 	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
 		<link rel="stylesheet" href="../assets/libs/semantic-ui/semantic.min.css" />
 		<link rel="stylesheet" href="../assets/css/semantic-fixes.css" />
 		<link rel="stylesheet" href="../assets/css/preview-page.css" />

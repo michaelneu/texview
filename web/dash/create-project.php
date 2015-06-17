@@ -7,7 +7,12 @@ if (isset($_POST["project-name"])) {
 	$user_id = $_SESSION["login"]["id"];
 	$name = $_POST["project-name"];
 
-	$project_directory = Project::create($user_id, $name);
-	header("Location: ../edit/?project=" . $project_directory);
+	$project_information = Project::create($user_id, $name);
+
+	$directory = $project_information["directory"];
+	$token     = $project_information["token"];
+	$url       = sprintf("../edit/?projects=%s&token=%s", $directory, $token);
+	
+	header("Location: $url");
 }
 ?>

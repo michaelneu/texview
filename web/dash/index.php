@@ -10,6 +10,8 @@ $projects = User::get_projects();
 <!doctype html>
 <html>
 	<head>
+		<title>Dashboard &middot; TeXView</title>
+		
 		<link rel="stylesheet" href="../assets/libs/semantic-ui/semantic.min.css" />
 		<link rel="stylesheet" href="../assets/css/semantic-fixes.css" />
 		<link rel="stylesheet" href="../assets/css/dashboard.css" />
@@ -44,7 +46,9 @@ $projects = User::get_projects();
 <?php
 
 foreach ($projects as $project) {
-	$directory           = $project["directory"];
+	$directory = $project["directory"];
+	$token     = $project["token"];
+
 	$project_information = new Project($directory);
 
 	$name  = $project["name"];
@@ -75,7 +79,7 @@ foreach ($projects as $project) {
 
 	echo "
 								<!-- <project> -->
-								<a class=\"project\" href=\"../edit/?project=$directory\">
+								<a class=\"project\" href=\"../edit/?project=$directory&token=$token\">
 									<div class=\"text\">
 										<div class=\"$color compile\">
 											<i class=\"ui $icon icon\"></i>
