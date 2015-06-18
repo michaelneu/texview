@@ -16,9 +16,6 @@ if ($_GET["token"] != $token or strlen($name) == 0) {
 	header("Location: ../dash/");
 }
 
-$tree = $project->get_directory_tree();
-var_dump($tree);
-
 ?>
 <!doctype html>
 <html>
@@ -36,7 +33,7 @@ var_dump($tree);
 		<!-- <navbar> -->
 		<div class="ui green inverted fixed menu">
 			<div class="container">
-				<a class="item" target="_blank" href="../read?project=<?php echo $texview_id; ?>"><i class="file pdf outline icon"></i> PDF</a>
+				<a class="item" target="_blank" href="../read?project=<?php echo $texview_id; ?>"><i class="file pdf outline icon"></i> Preview</a>
 				<a class="item" href="index.php"><i class="file archive outline icon"></i> Project</a>
 
 				<div class="right menu">
@@ -66,7 +63,8 @@ var_dump($tree);
 				var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
 					lineNumbers: true,
 					mode: "stex",
-					theme: "base16-light"
+					theme: "base16-light",
+					lineWrapping: true
 				});
 
 				var texview = new TeXViewEditor("<?php echo $texview_id; ?>", "<?php echo $token; ?>", editor);

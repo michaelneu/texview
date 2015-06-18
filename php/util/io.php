@@ -43,7 +43,10 @@ function walk_dir($directory) {
 		if (is_dir($path)) {
 			$sub_folders[$item] = walk_dir($path);
 		} else {
-			$sub_files[] = $item;
+			$sub_files[] = array(
+				"basename" => $item,
+				"path"     => $path
+			);
 		}
 	}
 

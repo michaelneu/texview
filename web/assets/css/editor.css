@@ -21,14 +21,13 @@
 .editor .file-list {
 	float: left;
 	display: inline-block;
-	width: 15%;
+	width: 200px;
 	height: 100%;
 
 	padding: 5px;
 
 	overflow-y: auto;
 	overflow-x: hidden;
-	text-overflow: ellipsis;
 
 	background-color: #333;
 	color: #fff;
@@ -39,6 +38,9 @@
 	width: 100%;
 	cursor: pointer;
 	display: block;
+
+	overflow-x: hidden;
+	text-overflow: ellipsis;
 }
 
 
@@ -56,9 +58,9 @@
 	max-height: 500px;
 }
 
-.editor .file-list .folder.selected, 
 .editor .file-list .file.selected {
-	color: #5bbd72;
+	/*color: #5bbd72;*/
+	color: #2ecc40;
 }
 
 .editor .file-list .folder {
@@ -69,9 +71,11 @@
 	content: "\f114";
 	display: inline-block;
 	margin-right: 5px;
+	color: #aaa;
 }
 .editor .file-list .folder .text {
 	display: block;
+	color: #ccc;
 }
 
 
@@ -80,8 +84,22 @@
 ***************************/
 
 .editor .file-list .file {
-	padding: 3px 16px;
-	color: #fff;
+	padding: 0px 16px;
+	color: #999;
+	cursor: pointer;
+}
+.editor .file-list .folder .file {
+	padding: 0px;
+}
+
+.editor .file-list .folder .file:before {
+	content: "├─ ";
+	display: inline-block;
+	margin-right: 5px;
+	color: #999;
+}
+.editor .file-list .folder .file:last-child:before {
+	content: "└─ ";
 }
 
 
@@ -91,7 +109,7 @@
 
 .editor > .codemirror {
 	display: inline-block;
-	width: 85%;
+	width: calc(100% - 200px);
 	height: 100%;
 }
 
