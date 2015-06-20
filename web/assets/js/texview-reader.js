@@ -97,6 +97,8 @@ TeXViewReader.prototype.onPollSuccess = function(data) {
 TeXViewReader.prototype.onPollFailed = function(data) {
 	var texview = this;
 
+	texview.__colorNavbar("FAIL");
+
 	setTimeout(function () {
 		texview.poll();
 	}, 500);

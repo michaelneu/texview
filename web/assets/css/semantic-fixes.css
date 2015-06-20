@@ -94,3 +94,29 @@
 	display: table-cell;
 	vertical-align: middle;
 }
+
+
+/***************************
+** 	toast notification   **
+***************************/
+
+.toast {
+	position: absolute;
+	bottom: 10px;
+	left: 0px;
+	right: 0px;
+
+	text-align: center;
+	pointer-events: none;
+	opacity: 0;
+
+	transition-property: opacity;
+	transition-duration: 0.5s;
+}
+.toast.shown {
+	opacity: 1;
+}
+
+.toast .ui.message {
+	display: inline-block;
+}

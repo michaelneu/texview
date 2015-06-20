@@ -3,28 +3,63 @@
 /**
  * Initializes the IDE
  */
-function TeXViewEditor(id, token, editor) {
+function TeXViewEditor(id, token, editor, notification) {
 	var texview = this;
 
+	// keep project related information
 	texview.id    = id;
 	texview.token = token;
 
+	// instances of dom elements
 	texview.fileTree = $(".file-list");
 	texview.editor   = editor;
+
+	// handle notifications
+	texview.notificationShown = false;
+	texview.notification      = $(notification);
 	
+	// flags for saving in general
 	texview.current    = null;
 	texview.savingFile = false;
 
+	// flags for saving after modifying the text
+	texview.saveWaitStarted = false;
+	texview.saveWaitAgain   = false;
+	texview.lastSavedText   = null;
 
 	// register the change handler for codemirror
+	texview.ignoreChange = false;
 	editor.on("change", function (cm, change) {
 		var text = cm.getValue();
 
 		texview.onEditorChange(text);
 	});
 
+	// initially load the file tree
 	texview.loadFileTree();
 }
+
+
+/**
+ * Displays a notification toast
+ */
+TeXViewEditor.prototype.notify = function(text) {
+	var texview      = this,
+		notification = texview.notification,
+		message      = notification.find(".ui.message");
+
+	if (!texview.notificationShown) {
+		texview.notificationShown = true;
+
+		message.text(text);
+		notification.addClass("shown");
+
+		setTimeout(function () {
+			notification.removeClass("shown");
+			texview.notificationShown = false;
+		}, 3000);
+	}
+};
 
 
 /**
@@ -37,13 +72,15 @@ TeXViewEditor.prototype.loadFileTree = function() {
 
 	// no sanity check required as this is only executed if the session is valid
 	$.ajax({
-		url: "filetree.php?project=" + this.id + "&token=" + this.token,
+		url: "filetree.php?project=" + texview.id + "&token=" + texview.token,
 		timeout: 30000,
 		dataType: "json",
 		success: function (data) {
 			texview.updateFileTree(data);
 		},
 		error: function (data) {
+			console.log("Error loading file tree. Retrying...");
+
 			setTimeout(function () {
 				texview.loadFileTree();
 			}, 1000);
@@ -64,7 +101,7 @@ TeXViewEditor.prototype.updateFileTree = function(data, parentElement) {
 
 	// if there's no parent element given, assume we're root
 	if (parentElement === undefined) {
-		currentElement = this.fileTree;
+		currentElement = texview.fileTree;
 	} else {
 		currentElement = parentElement;
 	}
@@ -81,7 +118,7 @@ TeXViewEditor.prototype.updateFileTree = function(data, parentElement) {
 			return false;
 		});
 
-		this.updateFileTree(folders[element], tempElement.find(".items"));
+		texview.updateFileTree(folders[element], tempElement.find(".items"));
 		currentElement.append(tempElement);
 	}
 
@@ -105,6 +142,9 @@ TeXViewEditor.prototype.updateFileTree = function(data, parentElement) {
 			})(files[element].basename, files[element].path);
 		}
 	}
+
+	// notify about initialisation
+	texview.notify("Initilisation finished");
 };
 
 
@@ -136,7 +176,7 @@ TeXViewEditor.prototype.displayFile = function(element, path) {
 
 	element = $(element);
 
-	if (!texview.savingFile) {
+	if (!texview.savingFile && !texview.saveWaitStarted) {
 		// disable the current selection 
 		$(".file-list .selected").removeClass("selected");
 
@@ -145,11 +185,16 @@ TeXViewEditor.prototype.displayFile = function(element, path) {
 			url: "file.php?project=" + texview.id + "&token=" + texview.token + "&file=" + encodedPath,
 			timeout: 3000,
 			success: function (data) {
+				texview.ignoreChange = true;
+
 				texview.current = path;
 				texview.editor.setValue(data);
 				texview.editor.focus();
 
 				element.addClass("selected");
+
+				texview.ignoreChange = false;
+				texview.notify("File loaded");
 			},
 			error: function (data) {
 				alert("Error loading file");
@@ -160,14 +205,76 @@ TeXViewEditor.prototype.displayFile = function(element, path) {
 	}
 };
 
-/**
- * 
- */
 
 
 /**
  * Handles saving the file after a change made in the editor
  */
 TeXViewEditor.prototype.onEditorChange = function(text) {
+	var texview = this;
 
+	if (!texview.ignoreChange && texview.lastSavedText != text) {
+		if (!texview.saveWaitStarted) {
+			texview.saveWaitStarted = true;
+			texview.saveWaitAgain   = true;
+
+			texview.waitForChanges();
+		} else {
+			texview.saveWaitAgain = true;
+		}
+	}
+};
+
+TeXViewEditor.prototype.waitForChanges = function() {
+	var texview = this;
+
+	if (texview.saveWaitAgain) {
+		texview.saveWaitAgain = false;
+
+		setTimeout(function () {
+			texview.waitForChanges();
+		}, 3000);
+	} else {
+		texview.savingFile      = true;
+		texview.saveWaitStarted = false;
+
+		texview.saveFile();
+	}
+};
+
+/**
+ * Send the file to the server
+ */
+TeXViewEditor.prototype.saveFile = function() {
+	var texview = this,
+		text    = texview.editor.getValue(),
+		json    = {
+			"project": texview.id,
+			"token": texview.token,
+			"file": texview.current,
+			"content": text
+		};
+
+
+	$.ajax({
+		type: "POST",
+		url: "save.php",
+		data: json,
+		success: function (data) {
+			texview.savingFile = false;
+
+			if (data != "") {
+				texview.notify("Error loading file: <br>" + data);
+			} else {
+				texview.notify("File saved");
+			}
+		}, 
+		error: function (data) {
+			console.log("Error saving file. Retrying in 1s");
+
+			setTimeout(function () {
+				texview.saveFile();
+			}, 1000);
+		}
+	});
 };

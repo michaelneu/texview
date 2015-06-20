@@ -51,8 +51,17 @@ if ($_GET["token"] != $token or strlen($name) == 0) {
 			<div class="codemirror">
 				<textarea id="code" autofocus></textarea>
 			</div>
+
+			<!-- <toast notification> -->
+			<div id="notification" class="toast">
+				<div class="ui black message">
+					
+				</div>
+			</div>
+			<!-- </toast notification> -->
 		</div>
 		<!-- <editor frame> -->
+
 
 		<script type="text/javascript" src="../assets/libs/jquery/jquery.min.js"></script>
 		<script type="text/javascript" src="../assets/libs/codemirror//lib/codemirror.js"></script>
@@ -67,7 +76,9 @@ if ($_GET["token"] != $token or strlen($name) == 0) {
 					lineWrapping: true
 				});
 
-				var texview = new TeXViewEditor("<?php echo $texview_id; ?>", "<?php echo $token; ?>", editor);
+				var notfication = $("#notification");
+
+				var texview = new TeXViewEditor("<?php echo $texview_id; ?>", "<?php echo $token; ?>", editor, notification);
 			});
 		</script>
 	</body>

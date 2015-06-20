@@ -50,6 +50,9 @@ TeXViewPDF.prototype.showPreview = function() {
 			});
 		}
 
+	}).catch(function (error) {
+		// ignore errors, just output them to the console
+		console.log(error);
 	});
 };
 
