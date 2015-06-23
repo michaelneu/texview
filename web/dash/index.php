@@ -22,6 +22,7 @@ $projects = User::get_projects();
 		<div class="ui green inverted fixed menu">
 			<div class="container">
 				<a class="active item" href="index.php"><i class="align left icon"></i> Dashboard</a>
+				<a class="item" href="settings.php"><i class="align left icon"></i> Settings</a>
 
 				<div class="right menu">
 					<a class="item" href="?logout"><i class="share icon"></i> Logout</a>

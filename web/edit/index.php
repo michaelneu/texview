@@ -66,6 +66,7 @@ if ($_GET["token"] != $token or strlen($name) == 0) {
 		<script type="text/javascript" src="../assets/libs/jquery/jquery.min.js"></script>
 		<script type="text/javascript" src="../assets/libs/codemirror//lib/codemirror.js"></script>
 		<script type="text/javascript" src="../assets/libs/codemirror/mode/stex/stex.js"></script>
+		<script type="text/javascript" src="../assets/libs/codemirror/addon/edit/matchbrackets.js"></script>
 		<script type="text/javascript" src="../assets/js/texview-editor.js"></script>
 		<script type="text/javascript">
 			$(function () {
@@ -73,7 +74,13 @@ if ($_GET["token"] != $token or strlen($name) == 0) {
 					lineNumbers: true,
 					mode: "stex",
 					theme: "base16-light",
-					lineWrapping: true
+					lineWrapping: true,
+					matchBrackets: true,
+					extraKeys: {
+						"Ctrl-S": function (cm) {
+							console.log("Saving automatically, just ignore this one. ");
+						}
+					}
 				});
 
 				var notfication = $("#notification");

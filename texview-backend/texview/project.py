@@ -5,7 +5,7 @@ import logging
 
 class Project: 
 	"""Representation of a TeXView project"""
-	def __init__(self, directory, compile_wait_time=3000): 
+	def __init__(self, directory, compile_wait_time=5000): 
 		"""Initialize a new representation of a project. The project will wait
 		for compile_wait_time ms of no changes before compiling"""
 		self.directory         = directory

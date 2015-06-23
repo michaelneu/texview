@@ -190,11 +190,11 @@ TeXViewEditor.prototype.displayFile = function(element, path) {
 				texview.current = path;
 				texview.editor.setValue(data);
 				texview.editor.focus();
+				texview.editor.clearHistory();
 
 				element.addClass("selected");
 
 				texview.ignoreChange = false;
-				texview.notify("File loaded");
 			},
 			error: function (data) {
 				alert("Error loading file");
@@ -233,7 +233,7 @@ TeXViewEditor.prototype.waitForChanges = function() {
 
 		setTimeout(function () {
 			texview.waitForChanges();
-		}, 3000);
+		}, 750);
 	} else {
 		texview.savingFile      = true;
 		texview.saveWaitStarted = false;
@@ -255,6 +255,7 @@ TeXViewEditor.prototype.saveFile = function() {
 			"content": text
 		};
 
+	texview.lastSavedText = text;
 
 	$.ajax({
 		type: "POST",

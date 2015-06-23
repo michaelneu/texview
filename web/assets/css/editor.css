@@ -120,6 +120,12 @@
 	font-size: 9pt;
 }
 
+.cm-s-base16-light .CodeMirror-matchingbracket {
+	color: #333 !important;
+	text-decoration: none;
+	border-bottom: 1px solid #999;
+}
+
 
 /***************************
 ** 	toast notification   **
