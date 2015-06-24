@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Join two paths
+ * 
+ * @param  string $a The first part of the new path
+ * @param  string $b The second part of the new path
+ * @return string    The joined path
+ */
 function path_join($a, $b) {
 	$paths = array(
 		rtrim($a, "/ "),
@@ -9,6 +16,11 @@ function path_join($a, $b) {
 	return implode("/", $paths);
 }
 
+/**
+ * Recursively delete the given directory. Similar to `rm -rf $dir` in shell
+ * 
+ * @param string $dir The directory to delete
+ */
 function rrmdir($dir) { 
 	if (is_dir($dir)) {
 		$objects = scandir($dir);
@@ -29,7 +41,12 @@ function rrmdir($dir) {
 	}
 }
 
-
+/**
+ * Recursively walks through a directory
+ * 
+ * @param  string $directory The directory to walk
+ * @return array             A complex array containing the directory's contents
+ */
 function walk_dir($directory) {
 	$sub_folders = array();
 	$sub_files = array();

@@ -2,6 +2,11 @@
 
 /**
  * Initializes the IDE
+ *
+ * @param {string}      id           The project's id (from the URL)
+ * @param {string}      token        The project's token (from the URL)
+ * @param {CodeMirror}  editor       The CodeMirror instance of the editor
+ * @param {DOM element} notification The element to display notifications in
  */
 function TeXViewEditor(id, token, editor, notification) {
 	var texview = this;
@@ -42,6 +47,8 @@ function TeXViewEditor(id, token, editor, notification) {
 
 /**
  * Displays a notification toast
+ *
+ * @param {string} text The text to be displayed
  */
 TeXViewEditor.prototype.notify = function(text) {
 	var texview      = this,
@@ -90,6 +97,9 @@ TeXViewEditor.prototype.loadFileTree = function() {
 
 /**
  * Displays the json data retrieved from `loadFileTree`. 
+ *
+ * @param {json}        data          The retrieved data
+ * @param {DOM element} parentElement The parent element of the current object. Optional. 
  */
 TeXViewEditor.prototype.updateFileTree = function(data, parentElement) {
 	var texview = this,
@@ -150,6 +160,9 @@ TeXViewEditor.prototype.updateFileTree = function(data, parentElement) {
 
 /**
  * Opens a directory in the file list
+ *
+ * @param  {DOM element} element The selected element
+ * @return {bool}                Prevents the default action for clicking
  */
 TeXViewEditor.prototype.openDirectory = function(element) {
 	var element = $(element),
@@ -169,6 +182,9 @@ TeXViewEditor.prototype.openDirectory = function(element) {
 
 /**
  * Loads the selected file in the editor
+ *
+ * @param {DOM element} element The selected file
+ * @param {string}      path    The file's path
  */
 TeXViewEditor.prototype.displayFile = function(element, path) {
 	var encodedPath = encodeURIComponent(path),
@@ -209,6 +225,8 @@ TeXViewEditor.prototype.displayFile = function(element, path) {
 
 /**
  * Handles saving the file after a change made in the editor
+ *
+ * @param {string} text The current text of the editor
  */
 TeXViewEditor.prototype.onEditorChange = function(text) {
 	var texview = this;
@@ -225,6 +243,9 @@ TeXViewEditor.prototype.onEditorChange = function(text) {
 	}
 };
 
+/**
+ * Waits for changes in the editor. 
+ */
 TeXViewEditor.prototype.waitForChanges = function() {
 	var texview = this;
 

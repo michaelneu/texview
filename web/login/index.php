@@ -10,7 +10,7 @@ if (isset($_POST["username"]) and isset($_POST["password"])) {
 	$password = $_POST["password"];
 
 	$id = User::check_credentials($username, $password);
-	if ($id > -1) {
+	if ($id !== false) {
 		User::login($username, $id);
 	} else {
 		$error = true;
@@ -78,7 +78,7 @@ if ($error) {
 								</div>
 
 								<div class="field">
-									<button type="submit" class="ui right labeled green full width icon button">
+									<button type="submit" class="ui right labeled green fluid icon button">
 										<i class="right arrow icon"></i>
 										Login
 									</button>

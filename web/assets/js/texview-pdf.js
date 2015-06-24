@@ -2,6 +2,8 @@
 
 /**
  * Initializes the PDF preview handler
+ *
+ * @param {string} id The id of the project
  */
 function TeXViewPDF(id) {
 	this.id = id;
@@ -59,6 +61,8 @@ TeXViewPDF.prototype.showPreview = function() {
 
 /**
  * Renders and appends the page as <canvas> elements to #pdf-preview-container
+ *
+ * @param {PDFJS} page The PDFJS page
  */
 TeXViewPDF.prototype.renderPage = function(page) {
 	var canvas  = $("<canvas></canvas>"),

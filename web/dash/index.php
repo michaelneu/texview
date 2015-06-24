@@ -2,7 +2,6 @@
 require_once("../../php/administration/user.php");
 require_once("../../php/security/bouncer.php");
 require_once("../../php/administration/project.php");
-require_once("../../php/database/database.php");
 
 $projects = User::get_projects();
 
@@ -22,7 +21,7 @@ $projects = User::get_projects();
 		<div class="ui green inverted fixed menu">
 			<div class="container">
 				<a class="active item" href="index.php"><i class="align left icon"></i> Dashboard</a>
-				<a class="item" href="settings.php"><i class="align left icon"></i> Settings</a>
+				<a class="item" href="../settings"><i class="align left icon"></i> Settings</a>
 
 				<div class="right menu">
 					<a class="item" href="?logout"><i class="share icon"></i> Logout</a>
@@ -137,7 +136,7 @@ if (count($projects) == 0) {
 								</div>
 
 								<div class="field">
-									<button type="submit" class="ui right labeled green full width icon button">
+									<button type="submit" class="ui right labeled green fluid icon button">
 										<i class="plus icon"></i>
 										Create
 									</button>
@@ -176,7 +175,7 @@ foreach ($projects as $project) {
 								</div>
 
 								<div class="field">
-									<button type="submit" class="ui right labeled red full width icon button">
+									<button type="submit" class="ui right labeled red fluid icon button">
 										<i class="x icon"></i>
 										Delete
 									</button>

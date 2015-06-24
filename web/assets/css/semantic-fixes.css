@@ -14,10 +14,6 @@
 	padding-top: 75px;
 }
 
-.full.width {
-	width: 100%;
-}
-
 
 
 /***************************
@@ -44,6 +40,9 @@
 
 .center-aligned {
 	text-align: center;
+}
+.right-aligned {
+	text-align: right;
 }
 
 .pull.left {

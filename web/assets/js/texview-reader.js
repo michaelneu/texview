@@ -14,6 +14,8 @@ function TeXViewReader(id) {
 
 /**
  * Long poll for changes in the PDF
+ * 
+ * @param {boolean} force Force the update
  */
 TeXViewReader.prototype.poll = function(force) {
 	var texview = this;
@@ -38,6 +40,10 @@ TeXViewReader.prototype.poll = function(force) {
 
 /**
  * Changes the element's style if the current style is different to the new style
+ * 
+ * @param {jQuery} element      The element to change
+ * @param {string} currentStyle The current style of the element
+ * @param {string} newStyle     The new style of the element
  */
 TeXViewReader.prototype.__changeStyleIfRequired = function(element, currentStyle, newStyle) {
 	if (currentStyle != newStyle) {
@@ -48,6 +54,8 @@ TeXViewReader.prototype.__changeStyleIfRequired = function(element, currentStyle
 
 /**
  * Color the navbar according to the PDF's compile state
+ *
+ * @param {string} state The compile state of the PDF
  */
 TeXViewReader.prototype.__colorNavbar = function(state) {
 	var STYLE_ERROR = "ui red inverted animated fixed menu",
@@ -74,6 +82,8 @@ TeXViewReader.prototype.__colorNavbar = function(state) {
 
 /**
  * Checks if the preview should be updated. Called by TeXViewReader.poll()
+ *
+ * @param {json} data The polling result
  */
 TeXViewReader.prototype.onPollSuccess = function(data) {
 	var status = data.status;
@@ -93,6 +103,8 @@ TeXViewReader.prototype.onPollSuccess = function(data) {
 
 /**
  * Restarts the polling if it failed after 500ms. Called by TeXViewReader.poll()
+ *
+ * @param {json} data The errored XHR data
  */
 TeXViewReader.prototype.onPollFailed = function(data) {
 	var texview = this;
