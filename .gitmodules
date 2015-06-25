@@ -7,3 +7,6 @@
 [submodule "web/assets/libs/pdf.js"]
 	path = web/assets/libs/pdf.js
 	url = https://github.com/mozilla/pdf.js
+[submodule "web/assets/libs/Semantic-UI"]
+	path = web/assets/libs/Semantic-UI
+	url = https://github.com/Semantic-Org/Semantic-UI
