@@ -1,3 +1,6 @@
 [submodule "web/assets/libs/codemirror"]
 	path = web/assets/libs/codemirror
 	url = https://github.com/codemirror/codemirror
+[submodule "web/assets/libs/jquery"]
+	path = web/assets/libs/jquery
+	url = https://github.com/jquery/jquery
