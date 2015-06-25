@@ -4,3 +4,6 @@
 [submodule "web/assets/libs/jquery"]
 	path = web/assets/libs/jquery
 	url = https://github.com/jquery/jquery
+[submodule "web/assets/libs/pdf.js"]
+	path = web/assets/libs/pdf.js
+	url = https://github.com/mozilla/pdf.js
