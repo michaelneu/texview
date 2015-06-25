@@ -105,6 +105,8 @@
 	left: 0px;
 	right: 0px;
 
+	z-index: 9000;
+
 	text-align: center;
 	pointer-events: none;
 	opacity: 0;
