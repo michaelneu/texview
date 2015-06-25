@@ -11,7 +11,7 @@ $projects = User::get_projects();
 	<head>
 		<title>Dashboard &middot; TeXView</title>
 		
-		<link rel="stylesheet" href="../assets/libs/semantic-ui/semantic.min.css" />
+		<link rel="stylesheet" href="../assets/libs/Semantic-UI/dist/semantic.min.css" />
 		<link rel="stylesheet" href="../assets/css/semantic-fixes.css" />
 		<link rel="stylesheet" href="../assets/css/dashboard.css" />
 	</head>
@@ -194,8 +194,8 @@ foreach ($projects as $project) {
 		</div>
 		<!-- </main container> -->
 
-		<script type="text/javascript" src="../assets/libs/jquery/jquery.min.js"></script>
-		<script type="text/javascript" src="../assets/libs/semantic-ui/semantic.min.js"></script>
+		<script type="text/javascript" src="../assets/libs/jquery/dist/jquery.min.js"></script>
+		<script type="text/javascript" src="../assets/libs/Semantic-UI/dist/semantic.min.js"></script>
 		<script type="text/javascript">
 			$(function () {
 				$(".dropdown").dropdown();

@@ -23,7 +23,7 @@ if (isset($_GET["project"])) {
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		
-		<link rel="stylesheet" href="../assets/libs/semantic-ui/semantic.min.css" />
+		<link rel="stylesheet" href="../assets/libs/Semantic-UI/dist/semantic.min.css" />
 		<link rel="stylesheet" href="../assets/css/semantic-fixes.css" />
 		<link rel="stylesheet" href="../assets/css/preview-page.css" />
 
@@ -64,9 +64,9 @@ if (isset($_GET["project"])) {
 
 		</div>
 
-		<script type="text/javascript" src="../assets/libs/jquery/jquery.min.js"></script>
+		<script type="text/javascript" src="../assets/libs/jquery/dist/jquery.min.js"></script>
 
-		<script type="text/javascript" src="../assets/libs/pdfjs/pdf.js"></script>
+		<script type="text/javascript" src="../assets/libs/pdf.js/build/pdf.js"></script>
 
 		<script type="text/javascript" src="../assets/js/texview-pdf.js"></script>
 		<script type="text/javascript" src="../assets/js/texview-reader.js"></script>

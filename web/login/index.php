@@ -26,7 +26,7 @@ if (User::is_logged_in()) {
 <!doctype html>
 <html>
 	<head>
-		<link rel="stylesheet" href="../assets/libs/semantic-ui/semantic.min.css" />
+		<link rel="stylesheet" href="../assets/libs/Semantic-UI/dist/semantic.min.css" />
 		<link rel="stylesheet" href="../assets/css/semantic-fixes.css" />
 	</head>
 

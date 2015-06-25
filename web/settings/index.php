@@ -8,7 +8,7 @@ require_once("../../php/security/bouncer.php");
 	<head>
 		<title>Settings &middot; TeXView</title>
 		
-		<link rel="stylesheet" href="../assets/libs/semantic-ui/semantic.min.css" />
+		<link rel="stylesheet" href="../assets/libs/Semantic-UI/dist/semantic.min.css" />
 		<link rel="stylesheet" href="../assets/css/semantic-fixes.css" />
 		<link rel="stylesheet" href="../assets/css/dashboard.css" />
 	</head>
@@ -137,8 +137,8 @@ if (User::is_root()) {
 		</div>
 		<!-- </main container> -->
 
-		<script type="text/javascript" src="../assets/libs/jquery/jquery.min.js"></script>
-		<script type="text/javascript" src="../assets/libs/semantic-ui/semantic.min.js"></script>
+		<script type="text/javascript" src="../assets/libs/jquery/dist/jquery.min.js"></script>
+		<script type="text/javascript" src="../assets/libs/Semantic-UI/dist/semantic.min.js"></script>
 		<script type="text/javascript" src="../assets/js/texview-settings.js"></script>
 		<script type="text/javascript">
 			$(function () {

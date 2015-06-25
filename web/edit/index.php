@@ -24,7 +24,7 @@ if ($_GET["token"] != $token or strlen($name) == 0) {
 
 		<link rel="stylesheet" href="../assets/libs/codemirror/lib/codemirror.css" />
 		<link rel="stylesheet" href="../assets/libs/codemirror/theme/base16-light.css" />
-		<link rel="stylesheet" href="../assets/libs/semantic-ui/semantic.min.css" />
+		<link rel="stylesheet" href="../assets/libs/Semantic-UI/dist/semantic.min.css" />
 		<link rel="stylesheet" href="../assets/css/semantic-fixes.css" />
 		<link rel="stylesheet" href="../assets/css/editor.css" />
 	</head>
@@ -63,8 +63,8 @@ if ($_GET["token"] != $token or strlen($name) == 0) {
 		<!-- <editor frame> -->
 
 
-		<script type="text/javascript" src="../assets/libs/jquery/jquery.min.js"></script>
-		<script type="text/javascript" src="../assets/libs/codemirror//lib/codemirror.js"></script>
+		<script type="text/javascript" src="../assets/libs/jquery/dist/jquery.min.js"></script>
+		<script type="text/javascript" src="../assets/libs/codemirror/lib/codemirror.js"></script>
 		<script type="text/javascript" src="../assets/libs/codemirror/mode/stex/stex.js"></script>
 		<script type="text/javascript" src="../assets/libs/codemirror/addon/edit/matchbrackets.js"></script>
 		<script type="text/javascript" src="../assets/js/texview-editor.js"></script>
