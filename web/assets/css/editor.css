@@ -59,7 +59,6 @@
 }
 
 .editor .file-list .file.selected {
-	/*color: #5bbd72;*/
 	color: #2ecc40;
 }
 
@@ -72,6 +71,7 @@
 	display: inline-block;
 	margin-right: 5px;
 	color: #aaa;
+	font-family: Icons;
 }
 .editor .file-list .folder .text {
 	display: block;
@@ -118,6 +118,10 @@
 	height: 100%;
 	cursor: text;
 	font-size: 9pt;
+}
+
+.CodeMirror-sizer {
+	margin-bottom: 90vh !important;
 }
 
 .cm-s-base16-light .CodeMirror-matchingbracket {
